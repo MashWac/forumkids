@@ -1,0 +1,107 @@
+.combo {
+    padding: 10px;
+}
+
+form {
+    margin-top: 6%;
+    margin-left: 25%;
+    margin-right: 20%;
+    background-color: rgba(2, 255, 255, 0.66);
+    border-radius: 2%;
+}
+
+label {
+    color: black;
+    margin-left: 33%;
+}
+
+input {
+    margin-left: 33%;
+    border-radius: 15%;
+    block-size: 20px;
+    display: block;
+}
+
+select {
+    margin-left: 33%;
+}
+
+body {
+    background-image: url("images/joysunbearlogo.png");
+    background-repeat: no-repeat;
+    background-size: 8%;
+    background-color: #02FFFF;
+    margin-top: 20%;
+}
+
+button {
+    font-size: 100%;
+    margin-left: 40%;
+    background-color: aliceblue;
+    border: 3px solid black;
+    border-radius: 15px;
+}
+
+.edge {
+    background-color: aliceblue;
+    margin-top: 10%;
+    margin-bottom: -10%;
+    margin-left: -5%;
+    margin-right: -5%;
+    padding: 2%;
+}
+
+.edge p {
+    margin-left: 40%;
+    margin-top: 1.5%;
+    font-size: 120%;
+}
+
+img {
+    margin-top: 0.5%;
+    margin-left: 3.5%;
+}
+
+.nav ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 20px 20px;
+    margin-top: -35px;
+    float: right;
+    position: relative;
+    border: 1.5px solid aliceblue;
+    border-radius: 8px;
+    background-color: aliceblue;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: lightgrey;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 1s;
+}
+
+.nav ul li:hover::after {
+    width: 100%;
+}
+
+.nav ul {
+    margin-top: -15%;
+}
+
+.edge a {
+    margin: 2px 2px;
+}
+
+.edge h5 {
+    margin-left: 10%;
+}
