@@ -90,7 +90,7 @@ class AdminController extends BaseController
             $data=[
             'admin_name'=>$this->request->getPost('adminname'),
             'admin_email'=>$this->request->getPost('email'),
-            'password'=>$encryptpass,
+            'password'=>$password,
             'admin_role'=>1
             ];
             $admin->save($data);
@@ -102,7 +102,7 @@ class AdminController extends BaseController
             $data=[
                 'parent_name'=>$this->request->getPost('parentname'),
                 'parent_email'=>$this->request->getPost('email'),
-                'password'=>$encryptpass,
+                'password'=>$password,
                 'parent_role'=>2
                 ];
             $parent->save($data);
@@ -121,7 +121,7 @@ class AdminController extends BaseController
                     'age'=>$this->request->getPost('age'),
                     'gender'=>$this->request->getPost('gender'),
                     'parent'=>$parentdets['parent_id'],
-                    'password'=>$encryptpass,
+                    'password'=>$password,
                     'kid_role'=>3
                     ];
                     $child->save($data);
@@ -248,7 +248,7 @@ class AdminController extends BaseController
         $forums=new ForumModel();
         $comments=new CommentModel();
         $data['forum']=json_decode(json_encode($forums->whereIn('forum.is_deleted',[0])->whereIn('forum.flagged',[1])->join('kids','kids.kid_id=forum.initiator')->paginate()),true);
-        $data['comments']=json_decode(json_encode($forums->join('comments','comments.forum=forum.forum_id')->whereIn('forum.flagged',[1])->whereIn('comments.comments_flagged',[1])->whereIn('comments.is_deleted',[0])->join('kids','kids.kid_id=forum.initiator')->paginate()),true);
+        $data['comments']=json_decode(json_encode($forums->join('comments','comments.forum=forum.forum_id')->whereIn('forum.is_deleted',[0])->whereIn('comments.comments_flagged',[1])->whereIn('comments.is_deleted',[0])->join('kids','kids.kid_id=forum.initiator')->paginate()),true);
 
 
         return view('Admin/Frontend/Forums/index',$data);
@@ -294,6 +294,16 @@ class AdminController extends BaseController
         $comments->update($id,$newData);
 
         return redirect()->to('forums')->with('status','Comment has been Deleted');
+    }
+    public function latestuploads()
+    {
+        $books=new UploadModel();
+        $puzzles=new PuzzleModel();
+        $quizes=new QuizModel();
+        $data['quizes']=json_decode(json_encode($quizes->whereIn('quizes.is_deleted',[0])->paginate()),true);
+        $data['puzzles']=json_decode(json_encode($puzzles->whereIn('puzzles.is_deleted',[0])->paginate()), true);
+        $data['books']=json_decode(json_encode($books->whereIn('books.is_deleted',[0])->paginate()), true);
+        return view('Admin/Frontend/UploadedContent/index',$data);
     }
     public function new_uploads()
     {
@@ -393,6 +403,134 @@ class AdminController extends BaseController
         }
 
     }
+    public function editcontent($id,$usertype){
+        $books=new UploadModel();
+        $puzzles=new PuzzleModel();
+        $quizes=new QuizModel();
+        if($usertype==1){
+            $data['formtype']="book";
+            $data['book']=json_decode(json_encode($books->whereIn('book_id', [$id])->paginate()),true);
+        }
+        elseif($usertype==2){
+            $data['formtype']="puzzle";
+            $data['puzzle']=json_decode(json_encode($puzzles->whereIn('puzzle_id', [$id])->paginate()),true);
+
+        }
+        else{
+            $data['formtype']="quiz";
+            $data['quiz']=json_decode(json_encode($quizes->whereIn('quiz_id', [$id])->paginate()),true); 
+
+        }
+        return view('Admin/Frontend/UploadedContent/edit',$data);
+
+    }
+    public function updatequizes($type)
+    {
+        $quiz=new QuizModel();
+        $puzzle=new PuzzleModel();
+
+        if($type==1){
+            $banner=$this->request->getFile('fileupload');
+            $id=$this->request->getPost('puzzle_id');
+
+            if(($banner->isValid()&&!$banner->hasMoved())){
+                $newNameb=$banner->getRandomName();
+                $banner->move('./upload',$newNameb);
+            }
+            else{
+           
+                echo'<script language="Javascript">';
+                echo 'alert($this->upload->display_errors())';
+                echo'</script>';
+            }
+            $data=['puzzle_name'=>$this->request->getPost('filename'),
+            'puzzle'=>$newNameb
+            ];
+            if($puzzle->update($id,$data)){
+                return redirect()->to('uploads')->with('status','Puzzle has been successfully updated');
+            }
+            
+        }else{
+            $banner=$this->request->getFile('fileupload');
+            $id=$this->request->getPost('quiz_id');
+
+
+            if(($banner->isValid()&&!$banner->hasMoved())){
+                $newNameb=$banner->getRandomName();
+                $banner->move('./upload',$newNameb);
+            }
+            else{
+           
+                echo'<script language="Javascript">';
+                echo 'alert($this->upload->display_errors())';
+                echo'</script>';
+            }
+            $data=['quiz_name'=>$this->request->getPost('filename'),
+            'quiz'=>$newNameb
+            ];  
+            if($quiz->update($id,$data)){
+                return redirect()->to('alluploads')->with('status','Quiz has been successfully updated');
+            }
+        }
+
+    }
+    
+    public function deletecontent($id,$role)
+    {  
+        $books=new UploadModel();
+        $puzzles=new PuzzleModel();
+        $quizes=new QuizModel();
+        $newData = [
+            'is_deleted'    => 1 ,
+        ];
+        if($role==3){
+            $quizes->update($id,$newData);
+        }
+        elseif($role==1){ 
+            $books->update($id,$newData);
+        }else{
+            $puzzles->update($id,$newData);
+        }  
+        return redirect()->to('alluploads')->with('status','Content Has Been Deleted');
+
+    }
+    public function updatebookinfo()
+    {
+        $model=new UploadModel();
+        $banner=$this->request->getFile('book-image');
+        $book=$this->request->getFile('book');
+        $bookid=$this->request->getPost('book_id');
+
+        if(($banner->isValid()&&!$banner->hasMoved())&&($book->isValid()&&!$book->hasMoved())){
+            $newNameb=$banner->getRandomName();
+            $banner->move('./upload',$newNameb);
+            $newNamec=$book->getRandomName();
+            $book->move('./upload',$newNamec);
+        }
+        else{
+       
+            echo'<script language="Javascript">';
+            echo 'alert($this->upload->display_errors())';
+            echo'</script>';
+
+        }
+        $data=['title'=>$this->request->getPost('title'),
+        'book_description'=>$this->request->getPost('book_description'),
+        'author'=>$this->request->getPost('author'),
+        'publisher'=>$this->request->getPost('publisher'),
+        'publish_year'=>$this->request->getPost('publish_year'),
+        'book_image'=>$newNameb,
+        'book'=>$newNamec
+        ];
+
+        if($model->update($bookid,$data)){
+            return redirect()->to('alluploads')->with('status','Content Has Been Updated');
+        }else{
+            return redirect()->to('uploads')->with('status','Book has been unsuccessfully Updated');
+
+        }
+
+    }
     public function flagged_users()
     { 
         $kids=new KidsModel();
@@ -417,10 +555,31 @@ class AdminController extends BaseController
             $data['kid']=$kids->where('kid_id', $id)->first();
             return view('Admin/Frontend/Users/viewuser',$data);
 
-
-
         }
         
+    }
+    public function unflagcomment($cid)
+    {
+        $comments=new CommentModel();
+        $forums=new ForumModel();
+
+        $newData = [
+            'comments_flagged'    => 0 ,
+        ];
+
+        $comments->update($cid,$newData);
+        return redirect()->to('forums')->with('status','Comment has been Unflagged .');
+    }
+    public function unflagforum($id)
+    {
+        $forums=new ForumModel();
+
+        $newData = [
+            'flagged'    => 0 ,
+        ];
+
+        $forums->update($id,$newData);
+        return redirect()->to('forums')->with('status','Forum has been unflagged.');
     }
 }
 

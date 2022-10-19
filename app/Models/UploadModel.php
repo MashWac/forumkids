@@ -13,7 +13,7 @@ class UploadModel extends Model
 	//protected $returnType   ='array';
 	//protected $useSoftDeletes   = true;
 
-	protected $allowedFields   = ['book_image', 'book_id','book', 'title', 'book_description', 'author', 'publisher', 'publish_year'];
+	protected $allowedFields   = ['book_image', 'book_id','book', 'title', 'book_description', 'author', 'publisher', 'publish_year','is_deleted'];
 
 
 	//protected $useTimestamps   = false

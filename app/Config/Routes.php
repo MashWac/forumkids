@@ -33,6 +33,8 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 $routes->add('homepage','Home::index');
+$routes->add('initial','Home::innit');
+
 
 $routes->get('forumhome', 'Forum::index');
 $routes->post('forum/addforum', 'Forum::addforum');
@@ -63,6 +65,19 @@ $routes->get('uploads','Admin\AdminController::new_uploads');
 $routes->add('addcontent/(:any)','Admin\AdminController::uploadforms/$1');
 $routes->post('uploadinfo','Admin\AdminController::uploadinfo');
 $routes->post('uploadquiz','Admin\AdminController::uploadquizes');
+$routes->get('alluploads', 'Admin\AdminController::latestuploads');
+$routes->get('editcontent/(:num)/(:num)','Admin\AdminController::editcontent/$1/$2');
+$routes->add('deletecontent/(:num)/(:num)','Admin\AdminController::deletecontent/$1/$2');
+$routes->post('editbookinfo/','Admin\AdminController::updatebookinfo/admin');
+$routes->post('editquiz/(:num)','Admin\AdminController::updatequizes/$1');
+$routes->get('puznadquiz', 'Home::latestuploads');
+$routes->get('readbooks', 'Home::ebooks');
+
+$routes->add('view-file/(:any)','Home::openpdf/$1');
+
+
+
+
 
 
 
@@ -74,6 +89,9 @@ $routes->post('user-add/parent','Admin\AdminController::add/parent');
 $routes->post('user-add/kid','Admin\AdminController::add/kid');
 $routes->add('delete-user/(:num)/(:num)','Admin\AdminController::delete/$1/$2');
 $routes->add('view-user/(:num)/(:num)','Admin\AdminController::view_profile/$1/$2');
+$routes->add('unflagcomment/(:num)/(:num)','Admin\AdminController::view_profile/$1/$2');
+$routes->add('unflagforum/(:num)','Admin\AdminController::unflagforum/$1');
+
 
 
 $routes->post('update/admin','Admin\AdminController::update_user/admin');
@@ -98,8 +116,7 @@ $routes->add('p-delete-user/(:num)/(:num)','ParentController::delete/$1/$2');
 
 
 
-// $routes->put('update-user/parent','Admin\AdminController::update_user/parent');
-// $routes->put('update-user/kid','Admin\AdminController::update_user/kid');
+
 
 
 

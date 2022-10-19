@@ -20,7 +20,9 @@
                     <div class="card-body">
                         <h5 class="card-title"><?=$item['title']?></h5>
                         <p class="card-text"><?=$item['main_comment']?></p>
-                        <a href="<?=base_url('deleteforum/'.$item['forum_id'])?>" class="btn btn-primary">Delete forum</a>
+                        <a href="<?=base_url('deleteforum/'.$item['forum_id'])?>" class="btn btn-danger">Delete forum</a>
+                        <a href="<?=base_url('unflagforum/'.$item['forum_id'])?>" class="btn btn-primary">Unflag forum</a>
+
                     </div>
                 </div>
                 <?php endforeach;?>
@@ -36,7 +38,9 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text"><?=$item['comment_post']?></p>
-                            <a href="<?=base_url('Admin/AdminController/deletecomment/'.$item['comment_id'].'/'.$item['forum_id'])?>" class="btn btn-primary">delete comment</a>
+                            <a href="<?=base_url('Admin/AdminController/deletecomment/'.$item['comment_id'].'/'.$item['forum_id'])?>" class="btn btn-danger">delete comment</a>
+                            <a href="<?=base_url('Admin/AdminController/unflagcomment/'.$item['comment_id'])?>" class="btn btn-primary">Unflag Comment</a>
+
                         </div>
                     </div>
                     <?php endforeach;?>

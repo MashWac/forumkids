@@ -1,0 +1,36 @@
+#landingback{
+    color: whitesmoke;
+    height: 60%;
+    background-image: url(../images/read1.jpg);
+    background-size:cover ;
+    background-repeat: no-repeat;
+    height: 80vh;
+}
+#welcomemessage{
+    font-size: xx-large;
+    color: rgb(250, 250, 250);
+    font-family: 'Trispace', sans-serif;
+}
+#landtext{
+    margin-left: 78%;
+    width:25%;
+    padding-top: 8%;
+}
+#landingread{
+    color: whitesmoke;
+    height: 60%;
+    background-image: url(../images/read2.jpg);
+    background-size:cover ;
+    background-repeat: no-repeat;
+    height: 80vh;
+}
+#message{
+    font-size: xx-large;
+    color: rgb(52, 52, 52);
+    font-family: 'Trispace', sans-serif;
+}
+#landread{
+    margin-left: 70%;
+    width:25%;
+    padding-top: 10%;
+}

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\ForumModel;
+
 
 class Forum extends BaseController
 {
@@ -30,6 +32,6 @@ class Forum extends BaseController
     		'genre'=>$this->request->getPost('genre'),
     		'main_comment'=>$this->request->getPost('main_comment')
         ];
-    	$forummodel->save($data);
+    	$forums->save($data);
     }
 }

@@ -10,139 +10,7 @@
     --box-color: rgba(2,255,255,0.66);
     --nav-color: rgba(2,255,255,0.36);
 }
-/*navbar*/
-.logo{
-    width: 100px;
-    height: 150px;
-    cursor: pointer;
-    position:fixed;
-    padding: 30px 0;
-    top: 0;
-    z-index: 100;
-    line-height: 20px;
-}
-h1{
-    font-size: 20px;
-    font-family: 'Oleo Script Swash Caps', sans-serif;
-    color:#050505;
-    cursor: pointer;
-    position:fixed;
-    padding: 30px 0;
-    top: 80px;
-    z-index: 100;
-}
-.navbar{
-    position:fixed;
-    background-color: var(--nav-color);
-    width:100%;
-    padding: 30px 0;
-    top: 0;
-    z-index: 100;
-    height: 150px;
-}
-.inner-width{
-    max-width: 1300px;
-    margin: auto;
-    padding: 0 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-}
-.navbar-menu button{
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'Raleway', sans-serif;
-    color: rgb(8, 8, 8);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-left: 45px;
-    display: inline-block;
-    text-decoration: none;
-    margin-top: 90px;
-}
-.navbar-menu .button{
-    border: 2px solid rgb(8, 8, 8);
-    border-radius: 30px;
-    width: 120px;
-    height: 50px;
-    top: 100px;
-}
-.navbar-menu .button:hover{
-    color: var(--box-color);
-    height: 55px;
-    width: 120px;
-}
-.navbar-menu .button::after{
-    color: var(--box-color);
-    height: 55px;
-    width: 120px;
-}
-.navbar-menu select{
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'Raleway', sans-serif;
-    color: #2d3436;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-left: 35px;
-    display: inline-block;
-    text-decoration: none;
-    outline: none;
-    color: rgb(8, 8, 8);
-}
-.navbar-menu select::after{
-    content: '';
-    display: block;
-    width: 0;
-    height: 1.8px;
-    background-color: #b2bec3;
-    transform: width .3s;
-}
-.navbar-menu select:hover::after{
-    width: 100%;
-}
-.navbar-menu .username{
-    font-size: 24px;
-    font-weight: 1000;
-    font-family: 'ZCOOL KuaiLe', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-right: 300px;
-    display: inline-block;
-    text-decoration: none;
-    top: 0;  
-}
-.search-wrapper{
-    border: 1px solid rgb(8, 8, 8);
-    height: 30px;
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    margin-right: 20px;
-}
-.search-wrapper span{
-    display: inline-block;
-    padding: 0rem 1rem;
-    font-size: 1.5rem;
-}
-.search-wrapper input{
-    height: 100%;
-    padding: .5rem;
-    border: none;
-    outline: none;
-}
-#logout{
-    font-size: 50px;
-    color: rgb(204, 7, 7);
-    margin-bottom: 80px;
-}
-#logout:hover{
-    font-size: 55px;
-}
+
 /*forum*/
 .body{
     height: 100% !important;
@@ -150,33 +18,45 @@ h1{
     background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(banner.jpg);
     background-position: center;
     background-size: cover;
-    position: absolute;
 }
 .box{
     display: grid;
-    grid-template-columns: 2fr 2fr;
+    grid-template-columns: 1fr 1fr;
 }
 .reviews{
     position: relative;
-    width: 800px;
-    height: 750px;
+    width: 450px;
+    height: 570px;
     background: var(--box-color);
     margin-top: 30px;
+    margin-left: 20px;
 }
 .forums{
     position: relative;
-    width: 1000px;
-    height: 750px;
+    width: 770px;
+    height: 570px;
     background: var(--box-color);
     margin-top: 30px;
+    margin-right: 20px;
 }
 #add_rating{
     margin-top: 5px;
     margin-bottom: 5px;
-    margin-left: 300px;
+    margin-left: 250px;
+}
+#create_forum{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 325px;
+}
+h2{
+    margin-left: 10px;
+}
+form{
+    margin-left: 10px;
 }
 /*star rating*/
-.reviews{
+.box{
     font-family:  'ZCOOL KuaiLe', sans-serif;
 }
 .container{
@@ -250,6 +130,16 @@ h1{
 	justify-content: center;
 	align-items: center;
 }
+.sm-modal {
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
 
 .modal-contents {
 	height: 400px;
@@ -279,5 +169,17 @@ input {
 	cursor: pointer;
 }
 .close:hover{
+    color: #666;
+}
+.done {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 42px;
+	color: #333;
+	transform: rotate(45deg);
+	cursor: pointer;
+}
+.done:hover{
     color: #666;
 }

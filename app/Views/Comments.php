@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/new.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/comment.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/navandfooter.css');?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,11 +31,8 @@
         <div class="card-header">
             <h4>Forum Activity</h4>
         </div>
-        
-        <div class="card-body">
-        </div>
 </div>
-<div class="card">
+<div class="card text-center">
         <div class="card-body">
                 <?php foreach($forum as $item):?>
                 <div class="card">
@@ -44,17 +42,16 @@
                         <span><ion-icon name="flag"></ion-icon></span>
                     </div>
                     <div class="card-body">
+                    <?php if(($_SESSION['name'])==$item['kid_name']):?>
                         <form method="post" action="/forum/deleteforum/<?=$item['forum_id']?>">
                             <h5 class="card-title"><?=$item['title']?></h5>
                             <p class="card-text"><?=$item['main_comment']?></p>
                             <button class="btn btn-primary">Delete</button>
                         </form>
+                        <?php endif;?>
                         <form method="post" action="/forum/flagforum/<?=$item['forum_id']?>">
                                 <button class="btn btn-primary">Flag forum</button>
                         </form>
-                        <form method="post" action="/forum/unflagforum/<?=$item['forum_id']?>">
-                                <button class="btn btn-primary">UNflag forum</button>
-                        </form>    
                     </div>
                     <div class="mb-3">
                         <div id="Reply">
@@ -78,15 +75,14 @@
                             <?php endif;?>
                         </div>
                         <div class="card-body">
+                        <?php if(($_SESSION['name'])==$item['kid_name']):?>
                             <form method="post" action="/forum/deletecomment/<?=$item['comment_id']?>">
                                 <p class="card-text"><?=$item['comment_post']?></p>
                                <button class="btn btn-primary">Delete</button>
                             </form>
+                            <?php endif;?>
                             <form method="post" action="/forum/flagcomment/<?=$item['comment_id']?>/<?=$item['forum_id']?>">
                                 <button class="btn btn-primary">Flag comment</button>
-                            </form>
-                            <form method="post" action="/forum/flagcomment/<?=$item['comment_id']?>/<?=$item['forum_id']?>">
-                                <button class="btn btn-primary">UnFlag comment</button>
                             </form>
                         </div>
                     </div>
@@ -98,5 +94,4 @@
     </div>
     
     </div>
-  </body>
-</html>
+    <?php include(APPPATH.'Views\templates\footer.php'); ?>

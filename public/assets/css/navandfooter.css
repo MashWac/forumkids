@@ -1,0 +1,159 @@
+
+.welmess{
+    margin-bottom: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+#userpanel{
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    display:ruby-base;
+    padding-right: 20px;
+}
+.f-nav{
+    border: 2px solid rgb(8, 8, 8);
+    border-radius: 30px;
+    width: 120px;
+    height: 50px;
+    top: 100px;
+}
+.dropdownoptions{
+    padding: 10px;
+    padding-top: 30px;
+    display:inline-block;
+    background-color:rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 1rem;
+    visibility: hidden;
+    position: relative;
+
+}
+.dropdownoptions::before{
+    content: "";
+    position: absolute;
+    top: -5px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(45deg);
+}
+.dropdownoptions.active{
+    padding: 10px;
+    padding-top: 30px;
+    display:inline-block;
+    background-color:rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 1rem;
+    visibility: visible;
+    width: fit-content;
+    position: relative;
+    z-index: 5;
+}
+
+#uname{
+    padding-bottom: 15px;
+}
+.uoption{
+    text-decoration: none;
+    font-size: 11px;
+    color: rgb(68, 68, 68);
+}
+.uoption:hover{
+    color: rgb(114, 240, 223);
+}
+#displayuserdetails{
+    font-size: 17px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    font-style: italic;
+}
+h2{
+    color: rgb(94, 3, 3);
+}
+#cartdetails{
+    text-decoration: none;
+    font-style: normal;
+    color: white;
+}
+#cartdetails:hover{
+
+    color: rgb(202, 198, 198);
+}
+#cartCount{
+    text-align: center;
+    padding: 0 0.9rem 0.1rem 0.9rem;
+    border-radius: 3rem;
+    text-decoration: none;
+    font-size: 14px;
+    background-color: white;
+    font-style: normal;
+    color: black;
+}
+nav ul{
+    margin:0;
+    padding: 0;
+    padding-top: 24px;
+    list-style: none;
+}
+nav li{
+    display: inline;
+    margin: 10px;
+    margin-left: 20px;
+    padding-top: 25px;
+    font-size: 14px;
+    text-transform: uppercase;
+    
+}
+nav a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;    
+}
+#footer{
+    display:grid;
+    justify-content: center;
+    background-color: rgb(14, 77, 150);
+    position: sticky;
+    top: 100%;
+    margin-top: 10%;
+    padding-top: 30px;
+    height: 350px;
+   
+}
+
+.footerinfo{
+    color: snow;
+    float: left;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+}
+
+#socials{
+    font-size: 22px;
+}
+#infolinks{
+    color: snow;
+    list-style: none;
+}
+.pagelinks{
+    text-decoration: none;
+    color: snow;
+}
+.pagelinks:hover{
+    font-size: larger;
+    text-decoration: none;
+    color: aliceblue;
+}
+.footerlinks{
+    padding-top: 15px;
+}
+#footer-bottom{
+    padding-top:20px ;
+    background: rgb(4, 63, 152);
+    color: whitesmoke;
+    height: 50px;
+    width: 100%;
+    text-align: center; 
+}

@@ -1,31 +1,92 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Forum</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/new.css'); ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+<button id="create_forum" class="btn btn-info">Create forum</button>
+<div class="container-fluid gy-5">
+<div class="container-sm" style="width: 50rem;">
+<div class="container-fluid" style="width:100%;" ;>    
+	</div>
+		<div class="card-body">
+			<table class="table">
+				<tr>
+					<thead>
+						<th></th>
+						<th scope="col">time</th>
+						<th scope="col">title</th>
+						<th scope="col">main</th>	
+						<th></th>					
+					</thead>
+				</tr>
+				<?php foreach($forum as $item):?>
+				<tr>
+					<tbody>
+						<th scope="row">
+						<td>
+							<?php echo $item['created_at'];?>
+						</td>
+						<td>
+							<?php echo $item['title'];?>
+						</td>
+						<td>
+							<?php echo $item['main_comment'];?>
+						</td>
+						<td>
+							<a href="forum/forumdetails/<?=$item['forum_id']?>">View Forum</a>	
+						</td>
+					</th>
+					</tbody>
+									
+				</tr>
+					<?php endforeach;?>	
+	
+			</table>			
+		</div>
+</div>
+				</div>
+				<div class="sm-modal">
+	            <div class="modal-contents">
+		            <div class="done">+</div>
+                <div class="forum-wrap">
+                <h2>Create a forum</h2>
+	<form method="post" action="/forum/addforum">
+      <div class="mb-3">
+ 				<label for="exampleFormControlInput1" class="form-label">Create Forum</label>
+				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="What is on your mind?" name="title">
+			</div>
+			<div>
+        <label>Genre</label>
+          <select name="genre">
+            <option value="Games">
+              Games
+            </option>
+            <option value="climate">
+              climate
+            </option>
+            <option value="Science">
+              Science
+            </option>
+            <option value="Technology">
+              Technology
+            </option>
+            <option value="Space">
+              Space
+            </option>
+          </select>
+        </div>
+		<div class="mb-3">
+			<label for="exampleFormControlTextarea1" class="form-label">Forum</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="main_comment"></textarea>
+		</div>
+		<div>
+			<button type="submit" class="btn btn-primary">MAKE FORUM</button>
+		</div>
+    </form>
+			<script src="assets/js/forum.js"></script>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <div class="body">
-    <?php include(APPPATH.'Views\templates\navbar.php'); ?>
-    <?php include(APPPATH.'Views\forum\forum.php'); ?>
-    
-    </div>
-  </body>
-</html>
+	function getData($results) {
+		alert('pressed')
+	}
+	
+</script>

@@ -34,29 +34,26 @@ class Register extends BaseController
         $parent=new ParentsModel();
         $child=new KidsModel();
         $admin=new AdminModel();
-       // $encrypter = \Config\Services::encrypter();
-        if($usertype=='admin'){
-            $password='admin1234';
-           // $encryptpass=$encrypter->encrypt($password);
-            $data=[
-            'admin_name'=>$this->request->getPost('adminname'),
-            'admin_email'=>$this->request->getPost('email'),
-            'password'=>$password,
-            'admin_role'=>1
-            ];
-            $admin->save($data);
+        $encrypter = \Config\Services::encrypter();
+        if($usertype=='parent'){
+            $pass=$this->request->getPost('password');
+            $conpass=$this->request->getPost('confirmpassword');
+            if($pass==$conpass){
+                $encryptpass=$encrypter->encrypt($pass);
+                $data=[
+                    'parent_name'=>$this->request->getPost('parentname'),
+                    'parent_email'=>$this->request->getPost('email'),
+                    'password'=>$pass,
+                    'parent_role'=>2
+                    ];
+                $parent->save($data);
+                return redirect()->to('login')->with('status','Registration Successful');
 
-        }
-        elseif($usertype=='parent'){
-            $password='parent1234';
-           // $encryptpass=$encrypter->encrypt($password);
-            $data=[
-                'parent_name'=>$this->request->getPost('parentname'),
-                'parent_email'=>$this->request->getPost('email'),
-                'password'=>$password,
-                'parent_role'=>2
-                ];
-            $parent->save($data);
+            }else{
+                return redirect()->to('parentregister')->with('status','Passwords and Confirm Password do not match!');
+
+            }
+
         }
         else{
             
@@ -64,25 +61,32 @@ class Register extends BaseController
             $parentdets=$parent->where('parent_email', $parent_email)->first();
             
             if($parentdets!=null){
-                $password='kid1234';
-               // $encryptpass=$encrypter->encrypt($password);
+                $pass=$this->request->getPost('password');
+                $conpass=$this->request->getPost('confirmpassword');
+    
+                if($pass==$conpass){
+                    $encryptpass=$encrypter->encrypt($pass);
                 $data=[
                     'kid_name'=>$this->request->getPost('kidname'),
                     'kid_email'=>$this->request->getPost('email'),
                     'age'=>$this->request->getPost('age'),
                     'gender'=>$this->request->getPost('gender'),
                     'parent'=>$parentdets['parent_id'],
-                    'password'=>$password,
+                    'password'=>$pass,
                     'kid_role'=>3
                     ];
                     $child->save($data);
+                    return redirect()->to('login')->with('status','Registration Successful');
+                }else{
+                    return redirect()->to('register')->with('status','Passwords and Confirm Password do not match!');
+
+                }
+
             }else{
                 return redirect()->to('register')->with('status','Error:User has not been added! Parent does not exists');
             }
 
-        }
-        return redirect()->to('adminhome')->with('status','A New User Has Been Added Succesfully');
-        
+        }        
     }
 
 }

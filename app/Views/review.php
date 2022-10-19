@@ -4,7 +4,9 @@
     <title>Forum</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/new.css'); ?>">
+    <link rel="stylesheet" href="assets/css/new.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/navandfooter.css');?>">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,81 +31,111 @@
     <?php include(APPPATH.'Views\templates\navbar.php'); ?>
 
     <div class="box">
-        <div class="reviews">
+      <div class="reviews">
+        <h2>Rate a book</h2>
 
-        <button id="add_rating" class="btn btn-info" name="rate">Add Rating</button>
+      <button id="add_rating" class="btn btn-info" name="rate">Add Rating</button>
 
-        <?php if($book_data): ?>
-          <?php foreach($book_data as $books): ?>
-          <div class="container" id="buttonContainer">
-            <div class="books">
-            <h2 class="text-center" id="book"><?=$books['title']; ?></h2>
-            <p class="text-center"><?=$books['book_description']; ?></p>
-
-          </div>
+       <?php if($book_data): ?>
+        <?php foreach($book_data as $books): ?>
+        <div class="container" id="buttonContainer">
+          <div class="books">
+          <h2 class="" id="book"><?=$books['title']; ?></h2>
+          <p class=""><?=$books['book_description']; ?></p>
 
         </div>
+
+      </div>
+        <?php endforeach ?>
+            <?php endif ?>
+
+      <div class="bg-modal">
+	            <div class="modal-contents">
+		            <div class="close">+</div>
+                <div class="rating-wrap">
+                <h2>Pick a book and add a rating</h2>
+                </div>
+                <div class="rating-wrap">
+
+            <form method="POST" action="add_rating" enctype="multipart/form-data">
+
+            <select name="book_id">
+                <?php if($book): ?>
+        <?php foreach($book as $bookss): ?>
+          <option value='<?= $bookss['book_id']; ?>'><?= $bookss['title'];?></option>";
           <?php endforeach ?>
-              <?php endif ?>
+            <?php endif ?>
+            </select>
 
-        <div class="bg-modal">
-                <div class="modal-contents">
-                  <div class="close">+</div>
-                  <div class="rating-wrap">
-                  <h2>Pick a book and add a rating</h2>
-                  </div>
-                  <div class="rating-wrap">
+            <?= csrf_field(); ?>
+            <fieldset class="rating">
+              <input type="radio" id="star5" name="rating" value="5"/>
+              <label for="star5" class="full" title="Awesome"></label>
+              <input type="radio" id="star4.5" name="rating" value="4.5"/>
+              <label for="star4.5" class="half"></label>
+              <input type="radio" id="star4" name="rating" value="4"/>
+              <label for="star4" class="full"></label>
+              <input type="radio" id="star3.5" name="rating" value="3.5"/>
+              <label for="star3.5" class="half"></label>
+              <input type="radio" id="star3" name="rating" value="3"/>
+              <label for="star3" class="full"></label>
+              <input type="radio" id="star2.5" name="rating" value="2.5"/>
+              <label for="star2.5" class="half"></label>
+              <input type="radio" id="star2" name="rating" value="2"/>
+              <label for="star2" class="full"></label>
+              <input type="radio" id="star1.5" name="rating" value="1.5"/>
+              <label for="star1.5" class="half"></label>
+              <input type="radio" id="star1" name="rating" value="1"/>
+              <label for="star1" class="full"></label>
+              <input type="radio" id="star0.5" name="rating" value="0.5"/>
+              <label for="star0.5" class="half"></label>
+            </fieldset>
+            <button type="submit" id="submit" class="btn btn-info" name="rate">Submit</button>
 
-              <form method="POST" action="add_rating" enctype="multipart/form-data">
-
-              <select name="book_id">
-                  <?php if($book): ?>
-          <?php foreach($book as $bookss): ?>
-            <option value='<?= $bookss['book_id']; ?>'><?= $bookss['title'];?></option>";
-            <?php endforeach ?>
-              <?php endif ?>
-              </select>
-
-              <?= csrf_field(); ?>
-              <fieldset class="rating">
-                <input type="radio" id="star5" name="rating" value="5"/>
-                <label for="star5" class="full" title="Awesome"></label>
-                <input type="radio" id="star4.5" name="rating" value="4.5"/>
-                <label for="star4.5" class="half"></label>
-                <input type="radio" id="star4" name="rating" value="4"/>
-                <label for="star4" class="full"></label>
-                <input type="radio" id="star3.5" name="rating" value="3.5"/>
-                <label for="star3.5" class="half"></label>
-                <input type="radio" id="star3" name="rating" value="3"/>
-                <label for="star3" class="full"></label>
-                <input type="radio" id="star2.5" name="rating" value="2.5"/>
-                <label for="star2.5" class="half"></label>
-                <input type="radio" id="star2" name="rating" value="2"/>
-                <label for="star2" class="full"></label>
-                <input type="radio" id="star1.5" name="rating" value="1.5"/>
-                <label for="star1.5" class="half"></label>
-                <input type="radio" id="star1" name="rating" value="1"/>
-                <label for="star1" class="full"></label>
-                <input type="radio" id="star0.5" name="rating" value="0.5"/>
-                <label for="star0.5" class="half"></label>
-              </fieldset>
-              <button type="submit" id="submit" class="btn btn-info" name="rate">Submit</button>
-
-            </div>
-            <h4 id="rating-value"></h4>
           </div>
-          <?php if(!empty(session()->getFlashdata('fail'))): ?>
-          <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
-      <?php endif ?>
-      <?php if(!empty(session()->getFlashdata('success'))): ?>
-          <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
-      <?php endif ?>
-          </form>
-          <script src="assets/js/forum.js"></script>
-    </div>
-    </div>
-        
+          <h4 id="rating-value"></h4>
+        </div>
+        <?php if(!empty(session()->getFlashdata('fail'))): ?>
+        <div class="alert alert-danger"><?= session()->getFlashdata('fail'); ?></div>
+    <?php endif ?>
+    <?php if(!empty(session()->getFlashdata('success'))): ?>
+        <div class="alert alert-success"><?= session()->getFlashdata('success'); ?></div>
+    <?php endif ?>
+        </form>
+        <script src="assets/js/review.js"></script>
+	</div>
+  </div>
+      <div class="forums">
+      <h2>Forums</h2>
+      <?php include(APPPATH.'Views\forum\forum.php'); ?>
       </div>
     </div>
-  </body>
-</html>
+    <?php
+
+if($pagination_link){
+    $pagination_link->setPath('review');
+
+    echo $pagination_link->links();
+}
+
+?>
+    </div>
+    <?php include(APPPATH.'Views\templates\footer.php'); ?>
+    <style>
+    .pagination li a{
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        margin-left: 200px;
+        line-height: 1.25;
+        color: #007bff;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+    }
+    .pagination li.active a{
+        z-index: 1;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+</style>

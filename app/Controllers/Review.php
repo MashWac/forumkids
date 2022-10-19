@@ -13,25 +13,30 @@ class Review extends BaseController
     }
     public function index()
     {
+        $forums=new \App\Models\ForumModel();
         $bookModel = new \App\Models\Book_model();
         $ratingModel = new \App\Models\Star_rating_model();
 
-        $data['book_data']= json_decode(json_encode($bookModel->findAll()),true);
+        $data['forum']=json_decode(json_encode($forums
+            ->whereIn('forum.is_deleted',[0])
+            ->join('kids','kids.kid_id=forum.initiator')->paginate(4)),true);
+            
+       
+        $data['book_data']= json_decode(json_encode($bookModel->whereIn('books.is_deleted',[0])->paginate(4)),true);
+        
         $data['book']= json_decode(json_encode($bookModel->findAll()),true);
-        //$book_id = $bookModel->select('id');
-        //$data['rating']= $ratingModel->select('rating', 'AVG');
-        //$data['rating']=json_decode(json_encode($ratingModel->join('book','book.book_id=reviews.book_id')->whereIn('book.is_deleted',[0])->getResultArray()), true);
+        $data['pagination_link'] = $bookModel->pager;
 
-        //print_r ($data['rating']);
+        $data['pagination_link'] = $forums->pager;
 
         return view('review', $data);
     }
     public function reviews()
     {
-
+        session();
         $rating = $this->request->getPost('rating');
         $book_id = $this->request->getPost('book_id');
-        $session_user = 1;
+        $session_user = $_SESSION['user_id'];
 
         $values =[
             'rating'=>$rating,
@@ -50,9 +55,10 @@ class Review extends BaseController
         $bookModel = new \App\Models\Book_model();
         $data['book_data']= json_decode(json_encode($bookModel->findAll()),true);
         $data['book']= json_decode(json_encode($bookModel->findAll()),true);
+        
 
         if($query){
-            return view('review', $data); 
+            return redirect()->to('review')->with('status','Review added.');
         }
 
     }

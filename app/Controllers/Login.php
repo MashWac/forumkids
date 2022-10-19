@@ -41,6 +41,7 @@ class Login extends BaseController
                 $sessionData = [
                     'user_id' => $data_kids['kid_id'],
                     'email' => $data_kids['kid_email'],
+                    'name'  => $data_kids['kid_name'],
                     'logged' => TRUE,
                     'role'=>3
                 ];
@@ -60,6 +61,7 @@ class Login extends BaseController
                 $sessionData = [
                     'user_id' => $data_parents['parent_id'],
                     'email' => $data_parents['parent_email'],
+                    'name'  => $data_parents['parent_name'],
                     'logged' => TRUE,
                     'role'=>2
                 ];
@@ -80,6 +82,7 @@ class Login extends BaseController
                 $sessionData = [
                     'user_id' => $data_admins['admin_id'],
                     'email' => $data_admins['admin_email'],
+                    'name'  => $data_admins['admin_name'],
                     'logged' => TRUE,
                     'role'=>1
                 ];

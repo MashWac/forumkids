@@ -1,32 +1,58 @@
-<style type="text/css">
-	.new
-	{
-		position: absolute;
-		top: 30%;
-		background-color: white;
-		position: absolute;
-		width: 70%;
-		padding: 5%;
-	}
-	.blog
-	{
-		position: absolute;
-		top: 90%;
-		
-		width: 80%;
-		background-color: white;
-		flex-grow: 1;
-	}
-</style>
-
-<div class="new">
-	<form method="post" action="forum/addforum">
-       <div class="mb-3">
- 			<label for="exampleFormControlInput1" class="form-label">Title</label>
-			<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="How are you feeling?" name="title">
+<button id="create_forum" class="btn btn-info">Create forum</button>
+<div class="container-fluid">
+<div class="container-sm" style="width: 50rem;">
+<div class="container-fluid" style="width:100%;" ;>    
+	</div>
+		<div class="card-body">
+			<table class="table">
+				<tr>
+					<thead>
+						<th></th>
+						<th scope="col">time</th>
+						<th scope="col">title</th>
+						<th scope="col">main</th>	
+						<th></th>					
+					</thead>
+				</tr>
+				<?php foreach($forum as $item):?>
+				<tr>
+					<tbody>
+						<th scope="row">
+						<td>
+							<?php echo $item['created_at'];?>
+						</td>
+						<td>
+							<?php echo $item['title'];?>
+						</td>
+						<td>
+							<?php echo $item['main_comment'];?>
+						</td>
+						<td>
+							<a href="forum/forumdetails/<?=$item['forum_id']?>"><button type="button" class="btn btn-success">View Forum</button></a>	
+							</button>
+						</td>
+					</th>
+					</tbody>
+									
+				</tr>
+					<?php endforeach;?>	
+	
+			</table>			
 		</div>
-		<div>
-          <label>Genre</label>
+</div>
+				</div>
+				<div class="sm-modal">
+	            <div class="modal-contents">
+		            <div class="done">+</div>
+                <div class="forum-wrap">
+                <h2>Create a forum</h2>
+	<form method="post" action="/forum/addforum">
+      <div class="mb-3">
+ 				<label for="exampleFormControlInput1" class="form-label">Create Forum</label>
+				<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="What is on your mind?" name="title">
+			</div>
+			<div>
+        <label>Genre</label>
           <select name="genre">
             <option value="Games">
               Games
@@ -52,56 +78,17 @@
 		<div>
 			<button type="submit" class="btn btn-primary">MAKE FORUM</button>
 		</div>
-
     </form>
+			<script src="assets/js/forum.js"></script>
 </div>
-<div class="blog">
-		<div class="card-body">
-			<table class="table">
-				<tr>
-					<thead>
-						<th></th>
-						<th scope="col">initiator</th>
-						<th scope="col">time</th>
-						<th scope="col">title</th>
-						<th scope="col">main</th>	
-						<th></th>					
-					</thead>
-				</tr>
-				<?php foreach($forum as $item):?>
-				<tr>
-					<tbody>
-						<th scope="row">
+</div>
+</div>
 
-						<td>
-							<?php echo $item['initiator'];?>
-						</td>
-						<td>
-							<?php echo $item['created_at'];?>
-						</td>
-						<td>
-							<?php echo $item['title'];?>
-						</td>
-						<td>
-							<?php echo $item['main_comment'];?>
-						</td>
-						<td>
-							<a href="forum/forumdetails/<?=$item['forum_id']?>">View Forum</a>	
-						</td>
-					</th>
-					</tbody>
-									
-				</tr>
-					<?php endforeach;?>	
-	
-			</table>			
-		</div>
 </div>
 <script type="text/javascript">
 
 	function getData($results) {
 		alert('pressed')
 	}
-	
 	
 </script>

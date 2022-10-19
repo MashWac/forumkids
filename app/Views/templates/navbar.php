@@ -1,28 +1,73 @@
-<nav class="navbar">
-    <img src="assets/images/logo.png" class="logo">
-    <h1 style="font-size: 24px;">joysunbear</h1>
-    <div class="inner-width">
-               
-               <div class="navbar-menu" style="top: 100px;">
+<?php if(((session()->get('logged')))):?>
+<header>
+    <div id="navsec">
+        <nav class="navbar navbar-expand-lg"  style="background-color: #0feded;">
+            <a class="navbar-brand" href="<?=base_url('homepage')?>"> <img src="assets/images/logo.png" class="logo" alt="logo" height="80" width="80"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-               <div class="username">
-                   <h1 style="font-family: 'ZCOOL KuaiLe', sans-serif; font-size: 24px; font-weight: 1000; top: 0;">Hi user</h1>
-               </div>
-
-               <button class="button"><a href="homepage" style="text-decoration: none; color:black;">Home</a></button>
-               <button class="button"><a href="forumhome" style="text-decoration: none; color:black;">forums</a></button>
-               <button class="button"><a href="#" style="text-decoration: none; color:black;">Read</a></button>
-               <button class="button"><a href="#" style="text-decoration: none; color:black;">About us</a></button>
-
-              
-           </div>
-           
-        
-       </div>
-       <div class="search-wrapper">
-                   <span class="las la-search" style="cursor:pointer;"></span>
-                   <input type="search" placeholder="Search...">
-               </div>
-
-               <a href="<?= base_url('Home/logout'); ?>"><span class="las la-power-off" id="logout"></span></a> 
-</nav>
+            <li class="welmess">
+                    <span>Hi <?php echo($_SESSION['name'])?>!!</span>
+            </li>
+         
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <button class="button f-nav"><a class="nav-link" href="<?=base_url('homepage')?>">Home <span class="sr-only">(current)</span></a></button>
+                    </li>
+                    <li class="nav-item">
+                    <button class="button f-nav"><a class="nav-link " href="<?=base_url('puznadquiz')?>" >
+                        Puzzles/Quizes
+                        </a></button>
+                    </li>
+                    <li class="nav-item ">
+                    <button class="button f-nav">
+                        <a class="nav-link" href="<?=base_url('review')?>">
+                        Forums
+                        </a></button>
+                    </li>
+                    <li class="nav-item">
+                    <button class="button f-nav">
+                        <a class="nav-link" href="<?=base_url('readbooks')?>">
+                        Read
+                        </a></button>
+                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?=base_url('logout')?>"><ion-icon size="small" name="power"></ion-icon> Logout</span></a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+            </div>
+        </nav>
+    </div>
+    </header>
+<?php else:?>
+    <header>
+    <div id="navsec">
+        <nav class="navbar navbar-expand-lg"  style="background-color: #0feded;">
+            <a class="navbar-brand" href="/Homepage"> <img src="assets/images/logo.png" class="logo" alt="logo" height="80" width="80"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <button class="button f-nav"><a class="nav-link" href="<?=base_url('initial')?>">Home <span class="sr-only">(current)</span></a></button>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <button class="button f-nav"><a class="nav-link" href="<?=base_url('login')?>">Login/SignUp</a></button>
+                    </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+            </div>
+        </nav>
+    </div>
+    </header>
+    <?php endif;?>

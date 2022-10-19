@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link href="/assets/css/style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/navandfooter.css');?>">
+
 	<link rel="icon" type="image/x-icon" href="../../images/favicon.jpeg">
 <style>
 	.container{
@@ -22,6 +24,8 @@
 
 	</head>
 	<body>
+	<?php include(APPPATH.'Views\templates\navbar.php'); ?>
+
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -82,6 +86,6 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
 
-	</body>
-</html>
+  <?php include(APPPATH.'Views\templates\footer.php'); ?>
+
 

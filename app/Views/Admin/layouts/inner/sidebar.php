@@ -1,6 +1,6 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
-                    <a href="adminhome" class="simple-text">
+                    <a href="<?=base_url('adminhome')?>" class="simple-text">
                     <img src="<?=base_url('assets/admin/images/sunbearlogo.png')?>" alt="logo" height="70px" width="190px">
                     
                     </a>
@@ -17,6 +17,12 @@
             <a href="<?=base_url('uploads')?>">
               <ion-icon name="cloud-upload"></ion-icon>
               <p>New Uploads</p>
+            </a>
+          </li>
+          <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('uploads') ? 'active' : ''}}">
+            <a href="<?=base_url('alluploads')?>">
+              <ion-icon name="folder"></ion-icon>
+              <p>Uploaded Content</p>
             </a>
           </li>
           <li class="nav-item {{ \Illuminate\Support\Facades\Request::is('users') ? 'active' : ''}}">

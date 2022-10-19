@@ -24,7 +24,7 @@ class Forum extends BaseController
         session();
 
         $data=[
-            'initiator'=>'4',
+            'initiator'=>$_SESSION['user_id'],
             'title'=>$this->request->getPost('title'),
             'genre'=>$this->request->getPost('genre'),
             'main_comment'=>$this->request->getPost('main_comment')
@@ -32,10 +32,11 @@ class Forum extends BaseController
 
         $forums->save($data);
        
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Forum created.');
     }
     public function forumdetails($id)
     {
+        session();
         $forums=new ForumModel();
         $comments=new CommentModel();
 
@@ -57,7 +58,7 @@ class Forum extends BaseController
 
         $comment->save($data);
 
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Comment created.');
     }
 
         public function deleteforum($id)
@@ -74,10 +75,10 @@ class Forum extends BaseController
                 $comments->update($item['comment_id'],$newData);
             }
             $forums->update($id,$newData);
-            return redirect()->to('forumhome')->with('status','Forum created.');
+            return redirect()->to('review')->with('status','Forum Deleted.');
         }else{
             $forums->update($id,$newData);
-            return redirect()->to('forumhome')->with('status','Forum created.');
+            return redirect()->to('review')->with('status','Forum Deleted.');
         }
         
     }
@@ -88,7 +89,7 @@ class Forum extends BaseController
             'is_deleted'    => 1 ,
         ];
         $comments->update($id,$newData);
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Comment deleted.');
     }
     public function flagcomment($cid,$id)
     {
@@ -104,7 +105,7 @@ class Forum extends BaseController
 
         $forums->update($id,$otherdat);
         $comments->update($cid,$newData);
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Comment flagged.');
     }
     public function flagforum($id)
     {
@@ -115,7 +116,7 @@ class Forum extends BaseController
         ];
 
         $forums->update($id,$newData);
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Forum flagged.');
     }
     public function unflagcomment($cid,$id)
     {
@@ -131,7 +132,7 @@ class Forum extends BaseController
 
         $forums->update($id,$otherdat);
         $comments->update($cid,$newData);
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Forum created.');
     }
     public function unflagforum($id)
     {
@@ -142,7 +143,7 @@ class Forum extends BaseController
         ];
 
         $forums->update($id,$newData);
-        return redirect()->to('forumhome')->with('status','Forum created.');
+        return redirect()->to('review')->with('status','Forum created.');
     }
    
 }

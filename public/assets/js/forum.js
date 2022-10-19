@@ -1,21 +1,12 @@
-let button = document.querySelector('#add_rating');
-let showPopup = document.querySelector('.bg-modal');
-let star = document.querySelectorAll('input');
-let showValue = document.querySelector('#rating-value');
+let button2 = document.querySelector('#create_forum');
+let forumPopup = document.querySelector('.sm-modal');
 
-button.addEventListener("click", function(){
-	showPopup.style.display = "flex";
-
-	for (let i = 0; i < star.length; i++) {
-		star[i].addEventListener('click', function() {
-			i = this.value;
-	
-			showValue.innerHTML = i + " out of 5";
-		});
-	}
+button2.addEventListener("click", function(){
+	forumPopup.style.display = "flex";
+});
+document.querySelector('.done').addEventListener("click", function() {
+	forumPopup.style.display = "none";
 });
 
-document.querySelector('.close').addEventListener("click", function() {
-	showPopup.style.display = "none";
-});
+
 

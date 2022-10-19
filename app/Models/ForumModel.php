@@ -21,16 +21,6 @@ public function fetchRecords($id=false)
         }
 
     }
-    public function add()
-    {
-        $ForumModel->save($_POST);
 
-    }
-    public function fetch()
-    {
-        $data['forum'] = $this->findAll();
-        
-
-    }
 }
 ?>
